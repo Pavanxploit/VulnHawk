@@ -1,0 +1,114 @@
+{
+  "service_cves": {
+    "OpenSSH": [
+      {"version_range": ["7.0", "7.4"], "cve": "CVE-2016-6515", "severity": "HIGH", "desc": "Denial of service via crafted auth requests"},
+      {"version_range": ["6.0", "6.9"], "cve": "CVE-2015-5600", "severity": "HIGH", "desc": "MaxAuthTries bypass allowing brute-force"},
+      {"version_range": ["5.0", "7.2"], "cve": "CVE-2016-0777", "severity": "MEDIUM", "desc": "Roaming feature leaks memory/private keys"}
+    ],
+    "Apache": [
+      {"version_range": ["2.4.0", "2.4.49"], "cve": "CVE-2021-41773", "severity": "CRITICAL", "desc": "Path traversal & RCE via mod_cgi"},
+      {"version_range": ["2.4.0", "2.4.50"], "cve": "CVE-2021-42013", "severity": "CRITICAL", "desc": "Path traversal bypass of CVE-2021-41773"},
+      {"version_range": ["2.2.0", "2.4.29"], "cve": "CVE-2017-9798", "severity": "MEDIUM", "desc": "Optionsbleed - memory disclosure via OPTIONS"}
+    ],
+    "nginx": [
+      {"version_range": ["0.6.18", "1.20.0"], "cve": "CVE-2021-23017", "severity": "HIGH", "desc": "Off-by-one in DNS resolver"},
+      {"version_range": ["1.3.9", "1.17.2"], "cve": "CVE-2019-9511", "severity": "HIGH", "desc": "HTTP/2 Data Dribble - DoS attack"}
+    ],
+    "vsftpd": [
+      {"version_range": ["2.3.4", "2.3.4"], "cve": "CVE-2011-2523", "severity": "CRITICAL", "desc": "Backdoor in vsftpd 2.3.4 - allows remote shell"},
+      {"version_range": ["3.0.0", "3.0.2"], "cve": "CVE-2015-1419", "severity": "HIGH", "desc": "Bypass of deny_file restrictions"}
+    ],
+    "ProFTPD": [
+      {"version_range": ["1.3.0", "1.3.3"], "cve": "CVE-2010-4221", "severity": "CRITICAL", "desc": "Stack overflow in TELNET_IAC handling"},
+      {"version_range": ["1.3.3", "1.3.4"], "cve": "CVE-2011-4130", "severity": "CRITICAL", "desc": "Use-after-free in response pool"}
+    ],
+    "MySQL": [
+      {"version_range": ["5.5.0", "5.5.62"], "cve": "CVE-2012-2122", "severity": "CRITICAL", "desc": "Auth bypass via timing attack in password check"},
+      {"version_range": ["5.6.0", "5.6.45"], "cve": "CVE-2019-2503", "severity": "HIGH", "desc": "Networking component vulnerability"}
+    ],
+    "PostgreSQL": [
+      {"version_range": ["11.0", "11.2"], "cve": "CVE-2019-9193", "severity": "HIGH", "desc": "COPY TO/FROM PROGRAM arbitrary command execution"},
+      {"version_range": ["9.3", "11.3"], "cve": "CVE-2019-10164", "severity": "HIGH", "desc": "Stack overflow in SCRAM authentication"}
+    ],
+    "Samba": [
+      {"version_range": ["3.5.0", "4.6.4"], "cve": "CVE-2017-7494", "severity": "CRITICAL", "desc": "SambaCry - RCE via writable share"},
+      {"version_range": ["4.0.0", "4.5.2"], "cve": "CVE-2016-2123", "severity": "HIGH", "desc": "Heap corruption in ndr_pull_dnsp_name"}
+    ],
+    "Redis": [
+      {"version_range": ["2.0.0", "5.0.5"], "cve": "CVE-2019-10192", "severity": "HIGH", "desc": "Heap buffer overflow in HyperLogLog"},
+      {"version_range": ["2.0.0", "6.0.3"], "cve": "CVE-2020-14147", "severity": "HIGH", "desc": "Denial of service via integer overflow"}
+    ],
+    "Tomcat": [
+      {"version_range": ["9.0.0", "9.0.30"], "cve": "CVE-2020-1938", "severity": "CRITICAL", "desc": "Ghostcat - AJP connector file read/inclusion"},
+      {"version_range": ["7.0.0", "7.0.99"], "cve": "CVE-2019-0232", "severity": "CRITICAL", "desc": "RCE via CGI on Windows systems"}
+    ]
+  },
+  "weak_credentials": {
+    "ftp": [
+      {"user": "anonymous", "pass": ""},
+      {"user": "ftp", "pass": "ftp"},
+      {"user": "admin", "pass": "admin"},
+      {"user": "admin", "pass": "password"}
+    ],
+    "ssh": [
+      {"user": "root", "pass": "root"},
+      {"user": "admin", "pass": "admin"},
+      {"user": "ubuntu", "pass": "ubuntu"},
+      {"user": "pi", "pass": "raspberry"}
+    ],
+    "mysql": [
+      {"user": "root", "pass": ""},
+      {"user": "root", "pass": "root"},
+      {"user": "mysql", "pass": "mysql"}
+    ],
+    "redis": [
+      {"user": "", "pass": ""},
+      {"user": "", "pass": "redis"},
+      {"user": "", "pass": "password"}
+    ]
+  },
+  "dangerous_ports": {
+    "21": {"service": "FTP", "risk": "HIGH", "reason": "Cleartext protocol, anonymous access possible"},
+    "23": {"service": "Telnet", "risk": "CRITICAL", "reason": "Unencrypted remote access - transmits passwords in plaintext"},
+    "25": {"service": "SMTP", "risk": "MEDIUM", "reason": "Open relay potential, email spoofing"},
+    "69": {"service": "TFTP", "risk": "HIGH", "reason": "No authentication, unauthenticated file access"},
+    "110": {"service": "POP3", "risk": "HIGH", "reason": "Cleartext email protocol"},
+    "111": {"service": "RPCbind", "risk": "HIGH", "reason": "NFS/RPC enumeration, DDoS amplification"},
+    "135": {"service": "MSRPC", "risk": "HIGH", "reason": "Windows RPC - multiple historical RCE vulnerabilities"},
+    "137": {"service": "NetBIOS-NS", "risk": "HIGH", "reason": "NetBIOS name resolution - information disclosure"},
+    "139": {"service": "NetBIOS-SSN", "risk": "HIGH", "reason": "SMB over NetBIOS - EternalBlue vector"},
+    "143": {"service": "IMAP", "risk": "MEDIUM", "reason": "Cleartext email protocol"},
+    "161": {"service": "SNMP", "risk": "HIGH", "reason": "Community string brute-force, info disclosure"},
+    "445": {"service": "SMB", "risk": "CRITICAL", "reason": "EternalBlue (MS17-010), WannaCry ransomware vector"},
+    "512": {"service": "rexec", "risk": "CRITICAL", "reason": "Unauthenticated remote execution"},
+    "513": {"service": "rlogin", "risk": "CRITICAL", "reason": "Cleartext remote login protocol"},
+    "514": {"service": "rsh", "risk": "CRITICAL", "reason": "Remote shell without authentication"},
+    "1433": {"service": "MSSQL", "risk": "HIGH", "reason": "Database exposure, sa account brute-force"},
+    "1521": {"service": "Oracle DB", "risk": "HIGH", "reason": "Database exposure, SID enumeration"},
+    "2049": {"service": "NFS", "risk": "HIGH", "reason": "Unauthenticated file system mount possible"},
+    "3306": {"service": "MySQL", "risk": "HIGH", "reason": "Database exposed to internet, auth bypass history"},
+    "3389": {"service": "RDP", "risk": "HIGH", "reason": "BlueKeep (CVE-2019-0708), brute-force vector"},
+    "4444": {"service": "Metasploit", "risk": "CRITICAL", "reason": "Default Metasploit listener - active compromise indicator"},
+    "5432": {"service": "PostgreSQL", "risk": "HIGH", "reason": "Database exposure, command execution via COPY"},
+    "5900": {"service": "VNC", "risk": "HIGH", "reason": "Remote desktop, often no/weak authentication"},
+    "6379": {"service": "Redis", "risk": "CRITICAL", "reason": "Unauthenticated access, RCE via config write"},
+    "8080": {"service": "HTTP-Alt", "risk": "MEDIUM", "reason": "Development server, misconfiguration common"},
+    "8443": {"service": "HTTPS-Alt", "risk": "MEDIUM", "reason": "Alternative HTTPS, often dev/staging"},
+    "9200": {"service": "Elasticsearch", "risk": "CRITICAL", "reason": "Unauthenticated data access, common data breach source"},
+    "27017": {"service": "MongoDB", "risk": "CRITICAL", "reason": "Unauthenticated access, data exfiltration vector"}
+  },
+  "ssl_weak_ciphers": [
+    "RC4", "DES", "3DES", "MD5", "SHA1", "NULL", "EXPORT", "ANON", "ADH", "AECDH"
+  ],
+  "http_security_headers": {
+    "Strict-Transport-Security": {"required": true, "severity": "HIGH", "desc": "Enforces HTTPS connections (HSTS)"},
+    "X-Frame-Options": {"required": true, "severity": "MEDIUM", "desc": "Prevents clickjacking attacks"},
+    "X-Content-Type-Options": {"required": true, "severity": "MEDIUM", "desc": "Prevents MIME-type sniffing"},
+    "Content-Security-Policy": {"required": true, "severity": "HIGH", "desc": "Prevents XSS and injection attacks"},
+    "X-XSS-Protection": {"required": false, "severity": "LOW", "desc": "Legacy XSS filter (deprecated but still useful)"},
+    "Referrer-Policy": {"required": false, "severity": "LOW", "desc": "Controls referrer information leakage"},
+    "Permissions-Policy": {"required": false, "severity": "LOW", "desc": "Controls browser feature permissions"},
+    "X-Powered-By": {"required": false, "severity": "INFO", "desc": "Technology disclosure header (should be removed)"},
+    "Server": {"required": false, "severity": "INFO", "desc": "Server software disclosure (should be removed)"}
+  }
+}
